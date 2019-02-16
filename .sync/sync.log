@@ -1,0 +1,125 @@
+﻿platform: Linux 4.15.0-45-generic #48-Ubuntu SMP Tue Jan 29 16:28:13 UTC 2019 x86_64
+version: 2.5.10.1172
+[13:25:00.415] VerifyFileWithHash failed on file /home/peter/Documents/Work/Aragon/aragon-token-locker/.sync/settings.dat with status 2.
+[13:25:00.415] VerifyFileWithHash failed on file /home/peter/Documents/Work/Aragon/aragon-token-locker/.sync/settings.dat with status 2.
+[13:25:00.415] VerifyFileWithHash failed on file /home/peter/Documents/Work/Aragon/aragon-token-locker/.sync/settings.dat with status 2.
+[20190214 13:25:00.416] ZIP: Can't locate [version] in zip, error -100.
+[20190214 13:25:00.417] Directory root is ""
+[20190214 13:25:00.417] test sha1: AE5BD8EFEA5322C4D9986D06680A781392F9A642
+[20190214 13:25:00.418] test sha2: 630DCD2966C4336691125448BBB25B4FF412A49C732DB2C8ABC1B8581BD710DD
+[20190214 13:25:00.420] test aes: 0A940BB5416EF045F1C39458C653EA5A07FEEF74E1D5036E900EEE118E949293
+[20190214 13:25:00.422] diskio_controller created
+[20190214 13:25:00.422] VerifyFileWithHash failed on file ./.sync//settings.dat with status 2.
+[20190214 13:25:00.422] VerifyFileWithHash failed on file ./.sync//settings.dat with status 2.
+[20190214 13:25:00.422] VerifyFileWithHash failed on file ./.sync//settings.dat with status 2.
+[20190214 13:25:00.441] register diskio completion queue with id 1
+[20190214 13:25:00.441] PLC[0x0000561114b77e50] binding on 0.0.0.0:10926
+[20190214 13:25:00.446] D! 20PeerListenConnection::listen[0x0000561114b77e50][6] bound listening socket 6 to IP 0.0.0.0:10926
+[20190214 13:25:00.447] PLC[0x0000561114b77e90] binding on [::]:10926
+[20190214 13:25:00.447] D! 20PeerListenConnection::listen[0x0000561114b77e90][8] bound listening socket 8 to IP [::]:10926
+[20190214 13:25:00.447] UDP: bound listening socket 9 to IP 0.0.0.0:10926
+[20190214 13:25:00.447] UDP: bound listening socket 10 to IP [::]:10926
+[20190214 13:25:00.449] Unable to listen for HTTP traffic on port 8888.  Exiting...
+[20190214 13:25:00.449] Quit reason: Unable to listen for HTTP traffic on port 8888.  Exiting...
+[20190214 13:25:00.459] register diskio completion queue with id 2
+[20190214 13:25:00.464] Create diskio thread for drive with id 4513409623, path: 
+[20190214 13:25:00.464] Create diskio thread for drive with id 4304728465, path: 
+[20190214 13:25:00.464] Create diskio thread for drive with id 4585277101, path: 
+[20190214 13:25:00.464] Create diskio thread for drive with id 4676165357, path: 
+[20190214 13:25:00.464] diskio thread start, drive_id = 4676165357, priority = normal
+[20190214 13:25:00.465] IPv6 is installed
+[20190214 13:25:00.467] diskio thread start, drive_id = 4585277101, priority = normal
+[20190214 13:25:00.471] VerifyFileWithHash failed on file ./.sync//sync.dat with status 2.
+[20190214 13:25:00.471] VerifyFileWithHash failed on file ./.sync//sync.dat with status 2.
+[20190214 13:25:00.471] VerifyFileWithHash failed on file ./.sync//sync.dat with status 2.
+[20190214 13:25:00.471] Unsupported or empty sync.dat file
+[20190214 13:25:00.471] My PeerID: 108598BFFE9D1A68DC75369D0383E21A386612BC
+[20190214 13:25:00.471] diskio thread start, drive_id = 4513409623, priority = normal
+[20190214 13:25:00.471] diskio thread start, drive_id = 4304728465, priority = normal
+[20190214 13:25:00.472] LC: LoadLicenses: there is no pro license
+[20190214 13:25:00.472] VerifyFileWithHash failed on file ./.sync//history.dat with status 2.
+[20190214 13:25:00.472] VerifyFileWithHash failed on file ./.sync//history.dat with status 2.
+[20190214 13:25:00.472] VerifyFileWithHash failed on file ./.sync//history.dat with status 2.
+[20190214 13:25:00.473] Joining to the multicast group 239.192.0.0:3838 on interface 172.17.0.1 (docker0)
+[20190214 13:25:00.473] Joining to the multicast group 239.192.0.0:3838 on interface 127.0.0.1 (lo)
+[20190214 13:25:00.473] Joining to the multicast group 239.192.0.0:3838 on interface 192.168.1.67 (wlp58s0)
+[20190214 13:25:00.474] Create diskio thread for drive with id 18446744073709551614, path: 
+[20190214 13:25:00.474] diskio thread start, drive_id = 18446744073709551614, priority = normal
+[20190214 13:25:00.475] Debug log mask has been set to FFFFFFFF
+[20190214 13:25:00.475] Features mask has been set to 0
+[20190214 13:25:00.475] Scheduler: Apply global rule, download limit: -1, upload limit: -1
+[20190214 13:25:00.475] CoreState: Total memory: 8075083776, used by Sync: 7143424, percentage used: 0.09
+[20190214 13:25:00.475] message thread start
+[20190214 13:25:12.883] NAT-PMP: Unable to map port with NAT-PMP.
+[13:25:13.124] Debug log mask has been set to FFFFFFFF
+[13:25:13.124] Features mask has been set to 0
+[20190214 13:25:13.126] ZIP: Can't locate [version] in zip, error -100.
+[20190214 13:25:32.114] OpenSSL: Loaded X509 trusted CA from "/etc/ssl/certs/ca-certificates.crt"
+[20190214 13:30:01.343] CoreState: Total memory: 8075083776, used by Sync: 2777088, percentage used: 0.03
+[20190214 13:35:02.660] CoreState: Total memory: 8075083776, used by Sync: 4034560, percentage used: 0.05
+[20190214 13:40:02.461] Unload diskio thread for drive with id 4304728465, path: 
+[20190214 13:40:02.462] diskio thread stop, drive_id = 4304728465
+[20190214 13:40:02.462] diskio destroy, drive_id = 4304728465
+[20190214 13:40:02.462] Unload diskio thread for drive with id 4513409623, path: 
+[20190214 13:40:02.462] diskio thread stop, drive_id = 4513409623
+[20190214 13:40:02.462] diskio destroy, drive_id = 4513409623
+[20190214 13:40:02.462] Unload diskio thread for drive with id 4585277101, path: 
+[20190214 13:40:02.463] diskio thread stop, drive_id = 4585277101
+[20190214 13:40:02.463] diskio destroy, drive_id = 4585277101
+[20190214 13:40:02.463] Unload diskio thread for drive with id 4676165357, path: 
+[20190214 13:40:02.463] diskio thread stop, drive_id = 4676165357
+[20190214 13:40:02.464] diskio destroy, drive_id = 4676165357
+[20190214 13:40:03.464] CoreState: Total memory: 8075083776, used by Sync: 4169728, percentage used: 0.05
+[20190214 13:45:06.758] CoreState: Total memory: 8075083776, used by Sync: 4403200, percentage used: 0.05
+[20190214 13:50:07.069] CoreState: Total memory: 8075083776, used by Sync: 4403200, percentage used: 0.05
+[20190214 13:55:06.857] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:00:00.194] Scheduler: Apply global rule, download limit: -1, upload limit: -1
+[20190214 14:00:07.202] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:05:07.541] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:10:08.400] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:15:13.701] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:20:14.020] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:25:14.352] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:30:14.160] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:35:15.478] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:40:15.315] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:45:19.658] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:50:19.973] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 14:55:20.301] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 15:00:00.078] Scheduler: Apply global rule, download limit: -1, upload limit: -1
+[20190214 15:00:20.105] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 15:05:23.445] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 15:10:24.737] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 15:15:28.540] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 15:20:31.859] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 15:25:35.676] CoreState: Total memory: 8075083776, used by Sync: 2686976, percentage used: 0.03
+[20190214 15:30:38.495] CoreState: Total memory: 8075083776, used by Sync: 2682880, percentage used: 0.03
+[20190214 15:35:37.779] CoreState: Total memory: 8075083776, used by Sync: 2682880, percentage used: 0.03
+[20190214 15:40:38.537] CoreState: Total memory: 8075083776, used by Sync: 2547712, percentage used: 0.03
+[20190214 15:45:39.305] CoreState: Total memory: 8075083776, used by Sync: 2547712, percentage used: 0.03
+[20190214 15:50:40.080] CoreState: Total memory: 8075083776, used by Sync: 1572864, percentage used: 0.02
+[20190214 15:55:42.845] CoreState: Total memory: 8075083776, used by Sync: 1286144, percentage used: 0.02
+[20190214 16:00:00.062] Scheduler: Apply global rule, download limit: -1, upload limit: -1
+[20190214 16:00:45.099] CoreState: Total memory: 8075083776, used by Sync: 1134592, percentage used: 0.01
+[20190214 16:05:46.910] CoreState: Total memory: 8075083776, used by Sync: 1802240, percentage used: 0.02
+[20190214 16:10:49.223] CoreState: Total memory: 8075083776, used by Sync: 1732608, percentage used: 0.02
+[20190214 16:15:53.034] CoreState: Total memory: 8075083776, used by Sync: 1728512, percentage used: 0.02
+[20190214 16:20:58.333] CoreState: Total memory: 8075083776, used by Sync: 991232, percentage used: 0.01
+[20190214 16:25:59.592] CoreState: Total memory: 8075083776, used by Sync: 2801664, percentage used: 0.03
+[20190214 16:30:59.875] CoreState: Total memory: 8075083776, used by Sync: 2801664, percentage used: 0.03
+[20190214 16:36:01.237] CoreState: Total memory: 8075083776, used by Sync: 2822144, percentage used: 0.03
+[20190214 16:41:01.043] CoreState: Total memory: 8075083776, used by Sync: 2822144, percentage used: 0.03
+[20190214 16:46:01.377] CoreState: Total memory: 8075083776, used by Sync: 2822144, percentage used: 0.03
+[20190214 16:51:05.181] CoreState: Total memory: 8075083776, used by Sync: 2822144, percentage used: 0.03
+[20190214 16:56:07.443] CoreState: Total memory: 8075083776, used by Sync: 2826240, percentage used: 0.03
+[20190214 17:00:01.199] Scheduler: Apply global rule, download limit: -1, upload limit: -1
+[20190214 17:01:09.269] CoreState: Total memory: 8075083776, used by Sync: 2826240, percentage used: 0.03
+[20190214 17:06:09.071] CoreState: Total memory: 8075083776, used by Sync: 2826240, percentage used: 0.03
+[20190214 17:11:08.882] CoreState: Total memory: 8075083776, used by Sync: 2826240, percentage used: 0.03
+[20190214 17:16:09.203] CoreState: Total memory: 8075083776, used by Sync: 2809856, percentage used: 0.03
+[20190214 17:21:10.489] CoreState: Total memory: 8075083776, used by Sync: 2228224, percentage used: 0.03
+[20190214 17:26:12.289] CoreState: Total memory: 8075083776, used by Sync: 2228224, percentage used: 0.03
+[20190214 17:31:13.563] CoreState: Total memory: 8075083776, used by Sync: 2228224, percentage used: 0.03
+[20190214 17:36:13.833] CoreState: Total memory: 8075083776, used by Sync: 2228224, percentage used: 0.03
+[20190214 17:41:13.584] CoreState: Total memory: 8075083776, used by Sync: 2224128, percentage used: 0.03
+[20190214 17:46:14.335] CoreState: Total memory: 8075083776, used by Sync: 2228224, percentage used: 0.03
