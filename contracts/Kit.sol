@@ -19,7 +19,7 @@ import "@aragon/os/contracts/apm/APMNamehash.sol";
 import "@aragon/apps-voting/contracts/Voting.sol";
 import "@aragon/apps-vault/contracts/Vault.sol";
 //import "@aragon/apps-finance/contracts/Finance.sol";
-import "./TokenLocker.sol";
+import "./MyBitTokenLocker.sol";
 import "./StandardToken.sol";
 import "./TokenSale.sol";
 import "@aragon/apps-shared-minime/contracts/MiniMeToken.sol";
@@ -59,13 +59,9 @@ contract Kit is KitBase {
     uint64 constant PERIOD = 2592000; //30 days
     uint256 constant TOKEN_SUPPLY = 10**30;
 
-    string tokenName = 'MyBit';
-    string tokenSym = 'MYB';
-    uint8 tokenDecimals = 18;
-    //uint256 lockAmount = 10**23;
-    uint256[] lockAmounts = [10**21, 10**22, 10**23];
-    uint256[] lockIntervals = [0, 3, 12];
-    uint256[] tokenIntervals = [1, 2, 3];
+    uint256[] lockAmounts = [10**18, 10**23, 10**23, 10**23];
+    uint256[] lockIntervals = [0, 3, 6, 12];
+    uint256[] tokenIntervals = [10, 15, 20, 30];
 
     constructor(ENS ens) KitBase(DAOFactory(0), ens) {
         tokenFactory = new MiniMeTokenFactory();
@@ -79,25 +75,25 @@ contract Kit is KitBase {
         bytes32 votingAppId = apmNamehash("voting");
         bytes32 vaultAppId = apmNamehash("vault");
         //bytes32 financeAppId = apmNamehash("finance");
-        bytes32 tokenLockerAppId = apmNamehash("token-locker");
+        bytes32 tokenLockerAppId = apmNamehash("mybit-tokens");
 
         Vault vault = Vault(dao.newAppInstance(vaultAppId, latestVersionAppBase(vaultAppId)));
         //Finance finance = Finance(dao.newAppInstance(financeAppId, latestVersionAppBase(financeAppId)));
         Voting voting = Voting(dao.newAppInstance(votingAppId, latestVersionAppBase(votingAppId)));
-        TokenLocker tokenLocker = TokenLocker(dao.newAppInstance(tokenLockerAppId, latestVersionAppBase(tokenLockerAppId)));
+        MyBitTokenLocker tokenLocker = MyBitTokenLocker(dao.newAppInstance(tokenLockerAppId, latestVersionAppBase(tokenLockerAppId)));
 
-        MiniMeToken token = tokenFactory.createCloneToken(MiniMeToken(0), 0, "MyVote", 0, "MYV", true);
+        MiniMeToken token = tokenFactory.createCloneToken(MiniMeToken(0), 0, "MyVote", 1, "MYV", true);
         //token.generateTokens(msg.sender, 1);
         token.changeController(tokenLocker);
 
-        StandardToken erc20 = new StandardToken(tokenName, tokenSym, tokenDecimals, TOKEN_SUPPLY);
+        StandardToken erc20 = new StandardToken("MyBit", "MYB", 18, TOKEN_SUPPLY);
         TokenSale tokensale = new TokenSale(address(erc20), address(0), address(0));
         erc20.transfer(msg.sender, TOKEN_SUPPLY/4);
-        //erc20.transfer(address(0x8401Eb5ff34cc943f096A32EF3d5113FEbE8D4Eb), TOKEN_SUPPLY/4);
+        erc20.transfer(address(0x8401Eb5ff34cc943f096A32EF3d5113FEbE8D4Eb), TOKEN_SUPPLY/4);
         erc20.approve(address(tokensale), TOKEN_SUPPLY/2);
         tokensale.startSale(now);
         tokensale.fund(0, 10**18, address(0xb4124cEB3451635DAcedd11767f004d8a28c6eE7));
-        tokensale.fund(1, 10**18, address(0x8401Eb5ff34cc943f096A32EF3d5113FEbE8D4Eb));
+        //tokensale.fund(1, 10**18, address(0x8401Eb5ff34cc943f096A32EF3d5113FEbE8D4Eb));
 
         // Initialize apps
         vault.initialize();

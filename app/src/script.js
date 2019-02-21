@@ -106,7 +106,6 @@ async function createStore(token, tokenAddr, tokensale, tokensaleAddr) {
           tokenAddress: tokenAddr,
           tokensaleAddress: tokensaleAddr,
           erc20Address: await loadERC20(),
-          //lockAmount: await loadLockAmount(),
           claimAmount: await loadClaimAmount(),
         }
       } else if (addressesEqual(address, tokenAddr)) {
@@ -169,7 +168,6 @@ async function transfer(token, state, { _from, _to }) {
   const changes = await loadNewBalances(token, _from, _to)
   // The transfer may have increased the token's total supply, so let's refresh it
   const tokenSupply = await loadTokenSupply(token)
-  console.log('Transferred')
   return updateHolderState(
     {
       ...state,
@@ -185,7 +183,6 @@ async function tokensPurchased(state, { _contributor, _amount, _day }) {
     contribution: _amount,
     day: _day,
   }
-  console.log('Contributed')
   return updateContributorState(
     { ...state },
     changes
@@ -197,7 +194,6 @@ async function tokenClaimed(state, { user }) {
     address: user,
     claimed: true,
   }
-  console.log('Claimed')
   return updateClaimedState(
     { ...state },
     changes
@@ -205,12 +201,6 @@ async function tokenClaimed(state, { user }) {
 }
 
 async function tokensLocked(token, state, { user, amount }) {
-  /*
-  const changes = await loadNewBalances(token, '0x0', user)
-  // The transfer may have increased the token's total supply, so let's refresh it
-  const tokenSupply = await loadTokenSupply(token)
-  changes[1].locked = amount;
-  */
   const changes = {
     address: user,
     locked: amount,
@@ -229,12 +219,13 @@ async function tokensLocked(token, state, { user, amount }) {
 
 function updateHolderState(state, changes) {
   const { holders = [] } = state
+  let newHolders = holders;
+  for(var i=0; i<changes.length; i++){
+    newHolders = updateHolders(newHolders, changes[i])
+  }
   return {
     ...state,
-    holders: changes
-      .reduce(updateHolders, holders)
-      // Filter out any addresses that now have no balance
-      .filter(({ balance, contribution, claimed }) => balance > 0 || (contribution > 0 && claimed == 0)),
+    holders: newHolders.filter(({ balance, contribution, claimed }) => balance > 0 || (contribution > 0 && claimed == 0)),
   }
 }
 
@@ -268,10 +259,6 @@ function updateHolders(holders, changed) {
     addressesEqual(holder.address, changed.address)
   )
   if (holderIndex === -1) {
-    changed.contribution = '0'
-    changed.locked = '0'
-    changed.claimed = false
-    // If we can't find it, concat
     holders.push(changed)
   } else {
     holders[holderIndex].balance = changed.balance
@@ -284,11 +271,11 @@ function updateContributors(holders, changed) {
     addressesEqual(contributor.address, changed.address)
   )
   if(contributorIndex === -1) {
-    changed.balance = '0'
-    changed.locked = '0'
-    changed.claimed = false
     holders.push(changed)
   } else {
+    if(!holders[contributorIndex].contribution){
+      holders[contributorIndex].contribution = '0'
+    }
     let total = String(Number(holders[contributorIndex].contribution) + Number(changed.contribution))
     holders[contributorIndex].contribution = total
     holders[contributorIndex].day = changed.day
@@ -301,9 +288,6 @@ function updateClaims(holders, changed) {
     addressesEqual(claimant.address, changed.address)
   )
   if(claimantIndex === -1) {
-    changed.balance = '0'
-    changed.contribution = '0'
-    changed.locked = '0'
     holders.push(changed)
   } else {
     holders[claimantIndex].claimed = changed.claimed
@@ -315,18 +299,10 @@ function updateLockers(holders, changed) {
   const lockerIndex = holders.findIndex(locker =>
     addressesEqual(locker.address, changed.address)
   )
-  console.log('Locked')
-  console.log(changed)
   if(lockerIndex === -1) {
-    console.log('New')
-    changed.balance = '0'
-    changed.contribution = '0'
-    changed.claimed = false
     holders.push(changed)
   } else {
-    console.log('Old')
     holders[lockerIndex].locked = changed.locked
-    holders[lockerIndex].balance = changed.balance
   }
   return holders
 }
@@ -343,16 +319,7 @@ function loadERC20() {
 function loadClaimAmount() {
   return new Promise((resolve, reject) =>
     app
-      .call('CLAIM_TOKENS')
-      .first()
-      .subscribe(resolve, reject)
-  )
-}
-
-function loadLockAmount() {
-  return new Promise((resolve, reject) =>
-    app
-      .call('lockAmount')
+      .call('claimAmount')
       .first()
       .subscribe(resolve, reject)
   )

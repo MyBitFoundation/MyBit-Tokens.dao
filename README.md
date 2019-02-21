@@ -1,25 +1,46 @@
-# Aragon React Kit Boilerplate
+# MyBit Tokens Aragon App
+## Rinkeby Deployment
+### mybit-tokens.open.aragonpm.eth v2.0.4:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmbL2tQjHSNATkzXeEtJkkCjLkNY1p2QKmjNWueaNUZVkX
+ - Transaction hash: 0xa6294193dd12f8cad3f90e1b6a65854cc9c8a1eaa6d5cbf8f2ccf63e209df353
 
-> 🕵️ [Find more boilerplates using GitHub](https://github.com/search?q=topic:aragon-boilerplate) |
-> ✨ [Official boilerplates](https://github.com/search?q=topic:aragon-boilerplate+org:aragon)
+### mybit-tokens.open.aragonpm.eth v2.0.3:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmfE3VdjcYgK1mQUASRYKVvghG7oH1dZs9tpV5DKVNGRBA
+ - Transaction hash: 0xe5f385e7b47ca4f1904b5baa99f61ce30038ce4afd0c3a3a28a20157bd65a406
 
-React boilerplate for Aragon applications.
+### mybit-tokens.open.aragonpm.eth v2.0.2:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmR2TQw3ba84hcw9gzZhPHPZMBnFtZ7gP8VoLcSac7QLap
+ - Transaction hash: 0x7bfcc41c2575575fd0e82f9eebc9cd522d10c65174a8d225b67d5e5ea51376b1
 
-This boilerplate also includes a fully working example app, complete with a background worker and a front-end in React (with Aragon UI).
+###  mybit-tokens.open.aragonpm.eth v2.0.1:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmYMPeuAFtD1pSAChBBycF27TgMmBXvZPDVj5LXvKF99Ke
+ - Transaction hash: 0xf0ed2b6b1d92b91854dbcfc55ad135e81a729e9d8e19b9e26a66c059d925ee79
 
-## Usage
+### mybit-tokens.open.aragonpm.eth v2.0.0:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmSbSjDbjigLZBUTYpAzhxmf7cC6DwYh5ZgzR5ARyNi1gz
+ - Transaction hash: 0xff1ea154139de35e7b1958c97855d4f1523638d81a665cb271eece98e8203679
 
-Kit support requires using the Aragon CLI with a version greater than 4.1.0.
-```sh
-npm install -g @aragon/cli
-aragon init app react-kit
-```
+### mybit-tokens.open.aragonpm.eth v1.0.2:
+ - Contract address: 0x300d51e1084256B79A5FD09f153B20920b48e150
+ - Content (ipfs): QmaRs1fhbxHw22oBA3Hx5UNEEeNAuRjHBvgUYYhweXL6du
+ - Transaction hash: 0xae4ea03fc8f9af632e0dcecb5b7db42f0159199be8cdea3816df63b252c2c20e
 
-## Make the kit work with your app
+### mybit-tokens.open.aragonpm.eth v1.0.1:
+ - Contract address: 0x300d51e1084256B79A5FD09f153B20920b48e150
+ - Content (ipfs): QmYXZaanjYZMyA6ciirpp9HmU9sPMzsMZAA5c2DQJzGSEX
+ - Transaction hash: 0x99d4eb4de0e9fcc1ee483605f35f1537bd5b654ff1e18a7774a991d5053fc03e
 
-- In order for the kit to work properly, it needs to know what the name of your app is. Replace `app` in [this line](https://github.com/aragon/aragon-react-kit-boilerplate/blob/dd7d571da4ab1ee6a0a82130b0c2c5d6218771b6/contracts/Kit.sol#L58) with the name of your app in the `arapp.json` file (e.g. `myapp` for `myapp.aragonpm.eth`)
 
-- Edit the roles defined in the kit to configure your DAO as you want!
+### mybit-tokens.open.aragonpm.eth v1.0.0:
+ - Contract address: 0x300d51e1084256B79A5FD09f153B20920b48e150
+ - Content (ipfs): QmWcJR7JTBBKYC46eC4GJqAB3U76TFdd4AUewvdBdjizL3
+ - Transaction hash: 0x5d3d6e8bc6e6825411ee69ccb98b97c0c3cbcc6e4dda1e36f2478c8b27e9a762
+
 
 ## Run the kit
 

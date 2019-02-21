@@ -26,5 +26,5 @@
       "network": "mainnet"
     }
   },
-  "path": "contracts/TokenLocker.sol"
+  "path": "contracts/MyBitTokenLocker.sol"
 }

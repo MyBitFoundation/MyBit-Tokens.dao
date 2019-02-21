@@ -153,9 +153,6 @@ class App extends React.Component {
     const holder = holders.find(holder =>
       addressesEqual(holder.address, address)
     )
-    if(holder){
-      console.log('Has Holder Claimed?: ', holder.claimed)
-    }
     return holder ? (holder.claimed ? claimAmount : new BN('0')) : new BN('0')
   }
   getHolderLocked = address => {
@@ -164,11 +161,8 @@ class App extends React.Component {
       addressesEqual(holder.address, address)
     )
     if(holder){
-      console.log('Holder')
-      console.log(holder)
-      console.log(holder.locked.toString())
+      console.log('Holder locked: ', holder.locked.toString())
     }
-
     return holder ? holder.locked : new BN('0')
   }
   isClaimable = address => {
@@ -182,13 +176,13 @@ class App extends React.Component {
       return false
     }
   }
-  handleUpdateTokens = ({ mode, selected }) => {
+  handleUpdateTokens = ({ mode, index}) => {
     const { app, erc20Address } = this.props
     const { lockAmounts, lockIntervals } = this.state
 
     if (mode === 'lock') {
       let intentParams = {
-        token: { address: erc20Address, value: lockAmounts[selected] },
+        token: { address: erc20Address, value: lockAmounts[index] },
         // While it's generally a bad idea to hardcode gas in intents, in the case of token deposits
         // it prevents metamask from doing the gas estimation and telling the user that their
         // transaction will fail (before the approve is mined).
@@ -198,7 +192,7 @@ class App extends React.Component {
         gas:'500000'
       }
 
-      app.lock(lockIntervals[selected], intentParams)
+      app.lock(lockIntervals[index], intentParams)
     }
     if (mode === 'unlock') {
       app.unlock()
@@ -257,7 +251,6 @@ class App extends React.Component {
       appStateReady,
       erc20Address,
       holders,
-      claimAmount,
       numData,
       tokenAddress,
       tokenDecimalsBase,
@@ -267,6 +260,7 @@ class App extends React.Component {
       tokenSymbol,
       tokenTransfersEnabled,
       userAccount,
+      claimAmount,
     } = this.props
     const {
       erc20Loaded,
@@ -408,8 +402,6 @@ export default observe(
         tokenSupply,
         tokenTransfersEnabled,
       } = state
-      console.log('Observable')
-      console.log(state)
       const tokenDecimalsBase = new BN(10).pow(new BN(tokenDecimals))
       const ethDecimalsBase = new BN(10).pow(new BN(18))
       return {
@@ -425,8 +417,13 @@ export default observe(
         },
         holders: holders
           ? holders
-              .map(holder => ({ ...holder, balance: new BN(holder.balance), contribution: new BN(holder.contribution), locked: new BN(holder.locked) }))
-              .sort((a, b) => b.balance.cmp(a.balance))
+              .map(holder => ({
+                ...holder,
+                balance: (holder.balance ? new BN(holder.balance) : new BN(0)),
+                contribution: (holder.contribution ? new BN(holder.contribution) : new BN(0)),
+                locked: (holder.locked ? new BN(holder.locked) : new BN(0)),
+                claimed: (holder.claimed ? holder.claimed : false)
+              })).sort((a, b) => b.balance.cmp(a.balance))
           : [],
         tokenDecimals: new BN(tokenDecimals),
         tokenSupply: new BN(tokenSupply),

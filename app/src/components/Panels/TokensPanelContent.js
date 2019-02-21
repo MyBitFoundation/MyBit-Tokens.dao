@@ -48,6 +48,7 @@ class TokensPanelContent extends React.Component {
   updateHolderAddress(mode, value) {
     const {
       tokenSymbol,
+      tokenDecimalsBase,
       erc20Symbol,
       erc20DecimalsBase,
       getHolderBalance,
@@ -71,7 +72,7 @@ class TokensPanelContent extends React.Component {
         if(lock.gt(new BN(0))){
           items.push({
             title: `Lock ${formatBalance(new BN(lockAmounts[i]), erc20DecimalsBase)} ${erc20Symbol} for ${lockIntervals[i]} month${lockIntervals[i] != 1 ? 's' : ''}`,
-            description: `Receive ${amount < 0 ? 0 : amount} ${tokenSymbol} by locking ${holderLocked.gt(new BN(0)) ? ' an additional' : ''} ${formatBalance(lock, erc20DecimalsBase)} ${erc20Symbol}`
+            description: `Receive ${amount < 0 ? 0 : formatBalance(amount, tokenDecimalsBase)} ${tokenSymbol} by locking ${holderLocked.gt(new BN(0)) ? ' an additional' : ''} ${formatBalance(lock, erc20DecimalsBase)} ${erc20Symbol}`
           })
         }
       }
@@ -87,7 +88,7 @@ class TokensPanelContent extends React.Component {
   }
   handleChange = index => {
     const { tokenIntervals } = this.props
-    const { holderBalance, holderClaimed } = this.state
+    const { items, holderBalance, holderClaimed } = this.state
     let amount = tokenIntervals[index] - (holderBalance-holderClaimed);
     if (amount < 0) amount = 0
 
@@ -101,19 +102,22 @@ class TokensPanelContent extends React.Component {
   }
   handleSubmit = event => {
     event.preventDefault()
-    const { mode, holderAddress } = this.props
+    const { mode, holderAddress, tokenIntervals } = this.props
     if(mode === 'burn'){
       const { burnMessage } = this.state
-      console.log('Burn')
       this.props.onBurnTokens({
         address: holderAddress,
         message: burnMessage
       })
     } else {
-      const { selected } = this.state
+      const { items, selected } = this.state
+      const diff = tokenIntervals.length - items.length
+      const index = selected + diff
+      console.log('diff: ', diff)
+      console.log('index: ', index)
       this.props.onUpdateTokens({
         mode,
-        selected
+        index
       })
     }
   }

@@ -21,8 +21,6 @@ class ConnectedApp extends React.Component {
     }
     if (data.name === 'ready') {
       const { app } = this.state
-      console.log('App')
-      console.log(app)
       this.sendMessageToWrapper('ready', true)
       this.setState({ observable: app.state() })
       app.accounts().subscribe(([userAccount]) => {

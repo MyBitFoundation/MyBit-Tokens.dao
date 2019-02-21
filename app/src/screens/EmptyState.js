@@ -9,7 +9,7 @@ const EmptyState = ({ onActivate }) => (
       icon={<img src={emptyIcon} alt="" />}
       title="Nothing here."
       text="Lock tokens to start using the app."
-      actionText="Lock Tokens"
+      actionText="Lock ERC20"
       onActivate={onActivate}
     />
   </Main>
