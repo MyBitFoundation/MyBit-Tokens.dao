@@ -30,18 +30,18 @@ Address \#2:  0x8401Eb5ff34cc943f096A32EF3d5113FEbE8D4Eb
 Private key: ce8e3bda3b44269c147747a373646393b1504bfcbb73fc9564f5d753d8116608
 ```
 
-  - You can import those private keys into MetaMask to interact with the DAO. They have been given the ERC-20 tokens needed to lock to voting tokens.
+  - You can import those private keys into MetaMask to interact with the DAO. They have been given the ERC-20 tokens needed to lock to receive voting tokens.
 
 ## Deploying from scratch using aragon-cli
 ### Notes
- - This app depends on two contracts which we assume are already deployed to the network. First, a standard ERC-20 token contract. The app locks ERC-20s for set periods of time in exchage for voting tokens. Second, it depends on the (MyBit Tokensale Contract)[https://github.com/MyBitFoundation/MyBit-Tokensale.tech] because it rewards contributors with voting tokens.
+ - This app depends on two contracts which we assume are already deployed to the network. First, a standard ERC-20 token contract. The app locks ERC-20s for set periods of time in exchage for voting tokens. Second, it depends on the [MyBit Tokensale Contract](https://github.com/MyBitFoundation/MyBit-Tokensale.tech) because it rewards contributors with voting tokens.
  - If you're deploying an app from scratch, you'll need to deploy both of these contracts first via your preferred method, e.g. Truffle, Remix, MyCrypto, etc...
- - The bulk of this guide is taken from (Luke Duncan's)[https://github.com/lkngtn] (post)[https://forum.aragon.org/t/guide-custom-aragon-organization-deployment-using-the-cli/507] on the Aragon forums. Which is a great help to anyone interested in customizing an Aragon DAO. If you encounter any issues it is best to look there first, as he mentions several bugs that can come up and their fixes.
+ - The bulk of this guide is taken from [Luke Duncan's](https://github.com/lkngtn) [post](https://forum.aragon.org/t/guide-custom-aragon-organization-deployment-using-the-cli/507) on the Aragon forums. Which is a great help to anyone interested in customizing an Aragon DAO. If you encounter any issues it is best to look there first, as he mentions several bugs that can come up and their fixes.
  - If you're using a hardware wallet for your deployment, you can use Frame by adding this flag to your commands:
  ```sh
  --use-frame
  ```
- - If you haven't used it, Frame is a great tool for injecting Web3 and signing transactions with a hardware wallet. You can check it out (here)[https://github.com/floating/frame].
+ - If you haven't used it, Frame is a great tool for injecting Web3 and signing transactions with a hardware wallet. You can check it out [here](https://github.com/floating/frame).
  - Depending on what network you deploy to, you will have to include environment flags.
  - For Rinkeby:
  ```sh
