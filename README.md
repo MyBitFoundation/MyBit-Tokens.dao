@@ -105,7 +105,7 @@ Private key: ce8e3bda3b44269c147747a373646393b1504bfcbb73fc9564f5d753d8116608
   - You'll see a lot of fields, I'll walk through each one.
     - \_token: The address of the voting token you created earlier.
     - \_erc20: The address of the erc20 token that should already be deployed. It is used for locking.
-    - \_tokensale: The address of the token sale that should also aready be deployed.
+    - \_tokensale: The address of the token sale that should also already be deployed.
     - \_vault: The address of the vault which you created earlier.
     - \_lockAmounts: An array of numbers that represent the amount of erc20 tokens that will be locked for each time interval. The amounts depend on the number of decimals used by the ERC-20 token. e.g. if you want to lock 1 token but the contract uses 18 decimals, you write 1000000000000000000. The number of items in the array depends on how many locking intervals you'd like to offer users.
     - \_lockIntervals: An array of numbers that represent the time of each locking interval in months. In the contract each month == 30 days.
@@ -118,10 +118,10 @@ Private key: ce8e3bda3b44269c147747a373646393b1504bfcbb73fc9564f5d753d8116608
 
 ### Adding Voting
 The voting app requires the following initialization parameters:
- - minime token: address of a minime token
- - support required percentage: Percentage of yeas in casted votes for a vote to succeed (expressed as a percentage of 10^18; eg. 10^16 = 1%, 10^18 = 100%)
- - min accept quorum: Percentage of yeas in total possible votes for a vote to succeed (expressed as a percentage of 10^18; eg. 10^16 = 1%, 10^18 = 100%)
- - vote time: Seconds that a vote will be open for token holders to vote (unless enough yeas or nays have been cast to make an early decision)
+ - MiniMe Token: address of the voting token
+ - Support Required Percentage: Percentage of yeas in casted votes for a vote to succeed (expressed as a percentage of 10^18; eg. 10^16 = 1%, 10^18 = 100%)
+ - Min Accept Quorum: Percentage of yeas in total possible votes for a vote to succeed (expressed as a percentage of 10^18; eg. 10^16 = 1%, 10^18 = 100%)
+ - Vote Time: Seconds that a vote will be open for token holders to vote (unless enough yeas or nays have been cast to make an early decision)
 
  For MyBit's Rinkeby DAO we require a support of 50% + 1, a minimum quorum of 25% and a voting period of 2 days so we do the following command:
  ```sh
