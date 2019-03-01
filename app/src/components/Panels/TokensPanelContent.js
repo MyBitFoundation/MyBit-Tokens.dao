@@ -1,7 +1,7 @@
 import React from 'react'
 import BN from 'bn.js'
 import styled from 'styled-components'
-import { Button, RadioList, Field, IconCross, Text, TextInput, Info } from '@aragon/ui'
+import { Button, RadioList, Field, IconError, Text, TextInput, Info } from '@aragon/ui'
 import { isAddress } from '../../web3-utils'
 import { fromDecimals, toDecimals, formatBalance } from '../../utils'
 
@@ -183,12 +183,11 @@ const Messages = styled.div`
 const WarningMessage = ({ message }) => <Info.Action>{message}</Info.Action>
 
 const ErrorMessage = ({ message }) => (
-  <p>
-    <IconCross />
+  <Info background="rgba(251,121,121,0.06)"><IconError />
     <Text size="small" style={{ marginLeft: '10px' }}>
       {message}
     </Text>
-  </p>
+  </Info>
 )
 
 export default TokensPanelContent

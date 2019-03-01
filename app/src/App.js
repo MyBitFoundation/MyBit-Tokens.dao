@@ -262,6 +262,8 @@ class App extends React.Component {
       userAccount,
       claimAmount,
     } = this.props
+    console.log('Props')
+    console.log(this.props)
     const {
       erc20Loaded,
       lockTokensConfig,
@@ -423,7 +425,9 @@ export default observe(
                 contribution: (holder.contribution ? new BN(holder.contribution) : new BN(0)),
                 locked: (holder.locked ? new BN(holder.locked) : new BN(0)),
                 claimed: (holder.claimed ? holder.claimed : false)
-              })).sort((a, b) => b.balance.cmp(a.balance))
+              }))
+              .filter(({ balance, contribution, claimed }) => balance.gt(0) || (contribution.gt(0) && !claimed))
+              .sort((a, b) => b.balance.cmp(a.balance))
           : [],
         tokenDecimals: new BN(tokenDecimals),
         tokenSupply: new BN(tokenSupply),

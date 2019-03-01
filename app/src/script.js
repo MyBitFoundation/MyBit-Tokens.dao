@@ -110,11 +110,6 @@ async function createStore(token, tokenAddr, tokensale, tokensaleAddr) {
         }
       } else if (addressesEqual(address, tokenAddr)) {
         switch (event) {
-          case 'ClaimedTokens':
-            if (addressesEqual(returnValues._token, tokenAddr)) {
-              nextState = await claimedTokens(token, nextState, returnValues)
-            }
-            break
           case 'Transfer':
             nextState = await transfer(token, nextState, returnValues)
             break
@@ -158,23 +153,33 @@ async function createStore(token, tokenAddr, tokensale, tokensaleAddr) {
  *   Event Handlers    *
  *                     *
  ***********************/
-
-async function claimedTokens(token, state, { _token, _controller }) {
-  const changes = await loadNewBalances(token, _token, _controller)
-  return updateHolderState(state, changes)
-}
-
-async function transfer(token, state, { _from, _to }) {
-  const changes = await loadNewBalances(token, _from, _to)
-  // The transfer may have increased the token's total supply, so let's refresh it
-  const tokenSupply = await loadTokenSupply(token)
-  return updateHolderState(
-    {
-      ...state,
-      tokenSupply,
-    },
-    changes
-  )
+async function transfer(token, state, { _from, _to, _amount }) {
+  //const changes = await loadNewBalances(token, _from, _to)
+  let changes;
+  if(_from != "0x0000000000000000000000000000000000000000"){
+    changes = {
+      address : _from,
+      balance : String(-Number(_amount))
+    }
+  } else if(_to != "0x0000000000000000000000000000000000000000"){
+    changes = {
+      address : _to,
+      balance : _amount
+    }
+  }
+  if(changes){
+    console.log('Balance Changes')
+    console.log(changes)
+    // The transfer may have increased the token's total supply, so let's refresh it
+    const tokenSupply = await loadTokenSupply(token)
+    return updateHolderState(
+      {
+        ...state,
+        tokenSupply,
+      },
+      changes
+    )
+  }
 }
 
 async function tokensPurchased(state, { _contributor, _amount, _day }) {
@@ -183,6 +188,8 @@ async function tokensPurchased(state, { _contributor, _amount, _day }) {
     contribution: _amount,
     day: _day,
   }
+  console.log('Contribution Changes')
+  console.log(changes)
   return updateContributorState(
     { ...state },
     changes
@@ -194,6 +201,8 @@ async function tokenClaimed(state, { user }) {
     address: user,
     claimed: true,
   }
+  console.log('Claim Changes')
+  console.log(changes)
   return updateClaimedState(
     { ...state },
     changes
@@ -205,6 +214,8 @@ async function tokensLocked(token, state, { user, amount }) {
     address: user,
     locked: amount,
   }
+  console.log('Locked Changes')
+  console.log(changes)
   return updateLockedState(
     { ...state },
     changes
@@ -219,13 +230,9 @@ async function tokensLocked(token, state, { user, amount }) {
 
 function updateHolderState(state, changes) {
   const { holders = [] } = state
-  let newHolders = holders;
-  for(var i=0; i<changes.length; i++){
-    newHolders = updateHolders(newHolders, changes[i])
-  }
   return {
     ...state,
-    holders: newHolders.filter(({ balance, contribution, claimed }) => balance > 0 || (contribution > 0 && claimed == 0)),
+    holders: updateHolders(holders, changes),
   }
 }
 
@@ -258,10 +265,13 @@ function updateHolders(holders, changed) {
   const holderIndex = holders.findIndex(holder =>
     addressesEqual(holder.address, changed.address)
   )
-  if (holderIndex === -1) {
+  if (holderIndex === -1 && changed.balance > 0) {
     holders.push(changed)
   } else {
-    holders[holderIndex].balance = changed.balance
+    if(!holders[holderIndex].balance){
+      holders[holderIndex].balance = '0'
+    }
+    holders[holderIndex].balance = String(Number(holders[holderIndex].balance) + Number(changed.balance))
   }
   return holders
 }
@@ -276,8 +286,7 @@ function updateContributors(holders, changed) {
     if(!holders[contributorIndex].contribution){
       holders[contributorIndex].contribution = '0'
     }
-    let total = String(Number(holders[contributorIndex].contribution) + Number(changed.contribution))
-    holders[contributorIndex].contribution = total
+    holders[contributorIndex].contribution = String(Number(holders[contributorIndex].contribution) + Number(changed.contribution))
     holders[contributorIndex].day = changed.day
   }
   return holders
@@ -323,28 +332,6 @@ function loadClaimAmount() {
       .first()
       .subscribe(resolve, reject)
   )
-}
-
-function loadNewBalances(token, ...addresses) {
-  return Promise.all(
-    addresses.map(
-      address =>
-        new Promise((resolve, reject) =>
-          token
-            .balanceOf(address)
-            .first()
-            .subscribe(balance => resolve({ address, balance }), reject)
-        )
-    )
-  ).catch(err => {
-    console.error(
-      `Failed to load new balances for ${addresses.join(', ')} due to:`,
-      err
-    )
-    // Return an empty object to avoid changing any state
-    // TODO: ideally, this would actually cause the UI to show "unknown" for the address
-    return {}
-  })
 }
 
 function loadTokenSupply(token) {
