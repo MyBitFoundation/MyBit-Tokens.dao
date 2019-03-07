@@ -69,7 +69,7 @@ class TokensPanelContent extends React.Component {
       for(var i=0; i<lockIntervals.length; i++){
         amount = new BN(tokenIntervals[i]).sub(holderBalance.sub(holderClaimed))
         lock = new BN(lockAmounts[i]).sub(holderLocked)
-        if(lock.gt(new BN(0))){
+        if(amount.gt(new BN(0))){
           items.push({
             title: `Lock ${formatBalance(new BN(lockAmounts[i]), erc20DecimalsBase)} ${erc20Symbol} for ${lockIntervals[i]} month${lockIntervals[i] != 1 ? 's' : ''}`,
             description: `Receive ${amount < 0 ? 0 : formatBalance(amount, tokenDecimalsBase)} ${tokenSymbol} by locking ${holderLocked.gt(new BN(0)) ? ' an additional' : ''} ${formatBalance(lock, erc20DecimalsBase)} ${erc20Symbol}`
