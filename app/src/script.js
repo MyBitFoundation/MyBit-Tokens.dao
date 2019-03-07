@@ -168,8 +168,6 @@ async function transfer(token, state, { _from, _to, _amount }) {
     }
   }
   if(changes){
-    console.log('Balance Changes')
-    console.log(changes)
     // The transfer may have increased the token's total supply, so let's refresh it
     const tokenSupply = await loadTokenSupply(token)
     return updateHolderState(
@@ -188,8 +186,6 @@ async function tokensPurchased(state, { _contributor, _amount, _day }) {
     contribution: _amount,
     day: _day,
   }
-  console.log('Contribution Changes')
-  console.log(changes)
   return updateContributorState(
     { ...state },
     changes
@@ -201,8 +197,6 @@ async function tokenClaimed(state, { user }) {
     address: user,
     claimed: true,
   }
-  console.log('Claim Changes')
-  console.log(changes)
   return updateClaimedState(
     { ...state },
     changes
@@ -214,8 +208,6 @@ async function tokensLocked(token, state, { user, amount }) {
     address: user,
     locked: amount,
   }
-  console.log('Locked Changes')
-  console.log(changes)
   return updateLockedState(
     { ...state },
     changes

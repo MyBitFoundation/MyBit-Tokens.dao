@@ -1,9 +1,9 @@
 # MyBit Tokens Aragon App
 ## Rinkeby Deployment
-### mybit-tokens.open.aragonpm.eth v2.0.6:
+### mybit-tokens.open.aragonpm.eth v2.0.8:
  - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
- - Content (ipfs): QmP4fCXYDyp89ETxR2rTz66XPDUtgfFyL6PLEw59SP5qud
- - Transaction hash: 0x2bb36b5eb27a525128a905d2605e395d6738f1da3440076abec778778ddf1883
+ - Content (ipfs): QmcYgoQoM5sDCKe1PzhbFnn2UDvh45VQDDY83dwbBGrFb8
+ - Transaction hash: 0x120873f5dd3a38b4028fbcbf251857d779419a61290ff804c49bd396095e672e
 
 ## Deploying Kit Locally
  - You will need to open two terminals. One in the root directory and the other in the app directory.
@@ -165,6 +165,16 @@ The voting app requires the following initialization parameters:
  - That should complete your DAO! You can access the front end at https://[network].aragon.org/#/[dao-address]
 
 ## Past Rinkeby Deployments
+### mybit-tokens.open.aragonpm.eth v2.0.7:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmcYgoQoM5sDCKe1PzhbFnn2UDvh45VQDDY83dwbBGrFb8
+ - Transaction hash: 0xbcb75f485247996a1af4a92b5ae04621b71453802c9802d43303a88eacc66b64
+
+### mybit-tokens.open.aragonpm.eth v2.0.6:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmP4fCXYDyp89ETxR2rTz66XPDUtgfFyL6PLEw59SP5qud
+ - Transaction hash: 0x2bb36b5eb27a525128a905d2605e395d6738f1da3440076abec778778ddf1883
+
 ### mybit-tokens.open.aragonpm.eth v2.0.5:
  - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
  - Content (ipfs): QmfHh9zgawTta5U6TQedkkBXqFqWrVAXEM4GGcMjXfoUwH

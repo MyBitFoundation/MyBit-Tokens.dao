@@ -160,9 +160,6 @@ class App extends React.Component {
     const holder = holders.find(holder =>
       addressesEqual(holder.address, address)
     )
-    if(holder){
-      console.log('Holder locked: ', holder.locked.toString())
-    }
     return holder ? holder.locked : new BN('0')
   }
   isClaimable = address => {
@@ -262,8 +259,6 @@ class App extends React.Component {
       userAccount,
       claimAmount,
     } = this.props
-    console.log('Props')
-    console.log(this.props)
     const {
       erc20Loaded,
       lockTokensConfig,

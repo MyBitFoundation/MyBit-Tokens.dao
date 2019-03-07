@@ -113,8 +113,6 @@ class TokensPanelContent extends React.Component {
       const { items, selected } = this.state
       const diff = tokenIntervals.length - items.length
       const index = selected + diff
-      console.log('diff: ', diff)
-      console.log('index: ', index)
       this.props.onUpdateTokens({
         mode,
         index
