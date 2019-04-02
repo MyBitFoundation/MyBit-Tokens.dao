@@ -8,7 +8,6 @@ pragma solidity 0.4.24;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
 import "@aragon/os/contracts/common/IForwarder.sol";
-import "@aragon/os/contracts/common/Uint256Helpers.sol";
 
 import "@aragon/os/contracts/lib/token/ERC20.sol";
 import "@aragon/os/contracts/lib/math/SafeMath.sol";
@@ -16,22 +15,30 @@ import "@aragon/os/contracts/lib/math/SafeMath.sol";
 import "@aragon/apps-shared-minime/contracts/ITokenController.sol";
 import "@aragon/apps-shared-minime/contracts/MiniMeToken.sol";
 
-import "@aragon/apps-vault/contracts/Vault.sol";
-
 interface TokenSaleInterface {
   function getWeiContributed(uint16 _day, address _contributor) external view returns (uint256);
 }
 
+interface WhitelistInterface {
+  function checkWhitelist(address _user) external view returns (bool);
+}
+
+interface VaultInterface {
+  function deposit(address _token, uint256 _value) external payable;
+}
+
 contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
     using SafeMath for uint256;
-    using Uint256Helpers for uint256;
 
-    //bytes32 public constant LOCK_ROLE = keccak256("LOCK_ROLE");
-    //bytes32 public constant UNLOCK_ROLE = keccak256("UNLOCK_ROLE");
+    //Events
+    event TokenClaimed(address user);
+    event TokensLocked(address user, uint256 amount);
+    event TokensBurned(address user, uint256 amount, string message);
+
     bytes32 public constant BURN_ROLE = keccak256("BURN_ROLE");
+    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
 
     string private constant ERROR_TOKEN_CONTROLLER = "TM_TOKEN_CONTROLLER";
-    string private constant ERROR_MINT_BALANCE_INCREASE_NOT_ALLOWED = "TM_MINT_BAL_INC_NOT_ALLOWED";
     string private constant ERROR_CAN_NOT_FORWARD = "TM_CAN_NOT_FORWARD";
     string private constant ERROR_PROXY_PAYMENT_WRONG_SENDER = "TM_PROXY_PAYMENT_WRONG_SENDER";
 
@@ -41,16 +48,17 @@ contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
     MiniMeToken public token;
     ERC20 public erc20;
     TokenSaleInterface public tokensale;
-    Vault public vault;
+    WhitelistInterface public whitelist;
 
-    mapping(address => bool) public claimedToken;
-    mapping(address => uint256) public lockStart;
-    mapping(address => uint256) public lockExpiry;
-    mapping(address => uint256) public lockAmount;
+    bool public recoveryStatus;
     uint256 public claimAmount;
-    uint256[] public lockAmounts;
-    uint256[] public lockIntervals;
-    uint256[] public tokenIntervals;
+    uint256[] private lockAmounts;
+    uint256[] private lockIntervals;
+    uint256[] private tokenIntervals;
+    mapping(address => bool) private claimedToken;
+    mapping(address => uint256) private lockStart;
+    mapping(address => uint256) private lockExpiry;
+    mapping(address => uint256) private lockAmount;
 
     /**
     * @notice Initialize Token Manager for `_token.symbol(): string`, whose tokens are `transferable ? 'not' : ''` transferable`_maxAccountTokens > 0 ? ' and limited to a maximum of ' + @tokenAmount(_token, _maxAccountTokens, false) + ' per account' : ''`
@@ -64,7 +72,7 @@ contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
         MiniMeToken _token,
         address _erc20,
         address _tokensale,
-        address _vault,
+        address _whitelist,
         uint256[] _lockAmounts,
         uint256[] _lockIntervals,
         uint256[] _tokenIntervals
@@ -82,18 +90,25 @@ contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
         token.enableTransfers(false);
         erc20 = ERC20(_erc20);
         tokensale = TokenSaleInterface(_tokensale);
-        vault = Vault(_vault);
+        whitelist = WhitelistInterface(_whitelist);
         lockAmounts = _lockAmounts;
         lockIntervals = _lockIntervals;
         tokenIntervals = _tokenIntervals;
-        uint256 decimals = uint256(token.decimals());
-        claimAmount = CLAIM_TOKENS.mul(10**decimals);
+        setClaimAmount();
+    }
+
+    function setClaimAmount() public {
+      uint256 decimals = uint256(token.decimals());
+      claimAmount = CLAIM_TOKENS.mul(10**decimals);
     }
 
     /**
     * @notice Claim Tokens
     */
     function claim(uint16 _day) external {
+      if(whitelist != address(0)){
+        require(whitelist.checkWhitelist(msg.sender));
+      }
       require(_authorized(msg.sender, _day), 'User not authorized to claim any tokens');
       require(!claimedToken[msg.sender], 'User has already claimed tokens');
       claimedToken[msg.sender] = true;
@@ -105,6 +120,9 @@ contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
     * @notice Lock Tokens
     */
     function lock(uint256 _lockTime) external {
+      if(whitelist != address(0)){
+        require(whitelist.checkWhitelist(msg.sender));
+      }
       uint amount;
       uint lockVal;
       uint expiry;
@@ -151,10 +169,13 @@ contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
       require(balance > 0, 'User has no tokens to burn');
       if(lockAmount[_user] > 0){
         //If user has locked ERC20, send lockAmount to the vault
+        address vault = getRecoveryVault();
         uint amount = lockAmount[_user];
         delete lockAmount[_user];
-        require(erc20.approve(address(vault), amount));
-        vault.deposit(address(erc20), amount);
+        if(vault != address(0)){
+          require(erc20.approve(vault, amount));
+          VaultInterface(vault).deposit(address(erc20), amount);
+        }
       }
       require(token.destroyTokens(_user, balance));
       emit TokensBurned(_user, balance, _message);
@@ -171,6 +192,41 @@ contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
     function getTokenIntervals() external view returns (uint256[]){
       return tokenIntervals;
     }
+
+    /**
+     * @notice Change locking values
+     */
+    function changeLocks(
+        uint256[] _lockAmounts,
+        uint256[] _lockIntervals,
+        uint256[] _tokenIntervals
+    )
+        external
+        auth(MANAGER_ROLE)
+    {
+        require(_lockAmounts.length == _lockIntervals.length);
+        require(_lockIntervals.length == _tokenIntervals.length);
+        lockAmounts = _lockAmounts;
+        lockIntervals = _lockIntervals;
+        tokenIntervals = _tokenIntervals;
+    }
+
+    /**
+     * @notice Give control of token over to `_newController`
+     * @param _newController Ethereum address of contract or user that will controll the token
+     */
+    function changeTokenController(address _newController) external auth(MANAGER_ROLE){
+      token.changeController(_newController);
+    }
+
+    /**
+     * @notice Change the whitelist to `_newNewWhitelist`
+     * @param _newWhitelist Ethereum address of the new whitelist
+     */
+    function changeWhitelist(address _newWhitelist) external auth(MANAGER_ROLE){
+      whitelist = WhitelistInterface(_newWhitelist);
+    }
+
 
     /**
     *
@@ -268,18 +324,21 @@ contract MyBitTokenLocker is ITokenController, IForwarder, AragonApp {
     * @return False if the controller does not authorize the approval
     */
     function onApprove(address, address, uint) public returns (bool) {
-        return true;
+        return false;
+    }
+
+    function setRecoveryStatus(bool _status)  external auth(MANAGER_ROLE){
+      recoveryStatus = _status;
     }
 
     /**
-    * @dev Disable recovery escape hatch for own token,
-    *      as the it has the concept of issuing tokens without assigning them
+    * @dev Disable recovery escape for erc20 depending on recoveryStatus
     */
     function allowRecoverability(address _token) public view returns (bool) {
-        return _token != address(token);
+      if(_token == address(erc20)){
+        return recoveryStatus;
+      } else {
+        return true;
+      }
     }
-
-    event TokenClaimed(address user);
-    event TokensLocked(address user, uint256 amount);
-    event TokensBurned(address user, uint256 amount, string message);
 }

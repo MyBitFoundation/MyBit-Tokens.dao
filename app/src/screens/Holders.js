@@ -26,7 +26,7 @@ class Holders extends React.Component {
       tokenTransfersEnabled,
       userAccount,
     } = this.props
-
+    
     return (
       <TwoPanels>
         <Main>

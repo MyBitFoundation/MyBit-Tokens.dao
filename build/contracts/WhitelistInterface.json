@@ -1,23 +1,19 @@
 {
-  "contractName": "TokenSaleInterface",
+  "contractName": "WhitelistInterface",
   "abi": [
     {
       "constant": true,
       "inputs": [
         {
-          "name": "_day",
-          "type": "uint16"
-        },
-        {
-          "name": "_contributor",
+          "name": "_user",
           "type": "address"
         }
       ],
-      "name": "getWeiContributed",
+      "name": "checkWhitelist",
       "outputs": [
         {
           "name": "",
-          "type": "uint256"
+          "type": "bool"
         }
       ],
       "payable": false,
@@ -27829,5 +27825,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-04-02T18:13:25.628Z"
+  "updatedAt": "2019-04-02T18:13:25.656Z"
 }

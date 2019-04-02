@@ -1,27 +1,22 @@
 {
-  "contractName": "TokenSaleInterface",
+  "contractName": "VaultInterface",
   "abi": [
     {
-      "constant": true,
+      "constant": false,
       "inputs": [
         {
-          "name": "_day",
-          "type": "uint16"
+          "name": "_token",
+          "type": "address"
         },
         {
-          "name": "_contributor",
-          "type": "address"
-        }
-      ],
-      "name": "getWeiContributed",
-      "outputs": [
-        {
-          "name": "",
+          "name": "_value",
           "type": "uint256"
         }
       ],
-      "payable": false,
-      "stateMutability": "view",
+      "name": "deposit",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
       "type": "function"
     }
   ],
@@ -27829,5 +27824,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-04-02T18:13:25.628Z"
+  "updatedAt": "2019-04-02T18:13:25.639Z"
 }

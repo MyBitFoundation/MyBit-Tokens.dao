@@ -6,6 +6,11 @@
       "params": [
         "User"
       ]
+    },
+    {
+      "name": "Manager",
+      "id": "MANAGER_ROLE",
+      "params": []
     }
   ],
   "environments": {

@@ -176,6 +176,8 @@ class App extends React.Component {
   handleUpdateTokens = ({ mode, index}) => {
     const { app, erc20Address } = this.props
     const { lockAmounts, lockIntervals } = this.state
+    console.log(lockAmounts)
+    console.log(lockIntervals)
 
     if (mode === 'lock') {
       let intentParams = {
@@ -421,7 +423,7 @@ export default observe(
                 locked: (holder.locked ? new BN(holder.locked) : new BN(0)),
                 claimed: (holder.claimed ? holder.claimed : false)
               }))
-              .filter(({ balance, contribution, claimed }) => balance.gt(0) || (contribution.gt(0) && !claimed))
+              .filter(({ balance, contribution, claimed }) => balance.gt(new BN('0')) || (contribution.gt(new BN('0')) && !claimed))
               .sort((a, b) => b.balance.cmp(a.balance))
           : [],
         tokenDecimals: new BN(tokenDecimals),

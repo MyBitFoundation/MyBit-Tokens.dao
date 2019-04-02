@@ -1,9 +1,39 @@
 # MyBit Tokens Aragon App
 ## Rinkeby Deployment
-### mybit-tokens.open.aragonpm.eth v2.0.8:
- - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
- - Content (ipfs): QmcYgoQoM5sDCKe1PzhbFnn2UDvh45VQDDY83dwbBGrFb8
- - Transaction hash: 0x120873f5dd3a38b4028fbcbf251857d779419a61290ff804c49bd396095e672e
+###mybit-tokens.open.aragonpm.eth v6.0.0:
+ - Contract address: 0x9e30C203E106E6c07cC47E4bfED1252f44cb5516
+ - Content (ipfs): QmXdd39rTr8Bt5kdaZwPFD1JLJ4Lmktkxn8CG7ZHofxcdN
+ - Transaction hash: 0x6646421de7eecb5e53ccbe5cec1bf2754d233fa155d40a264c0fb876af98aa24
+
+### mybit-tokens.open.aragonpm.eth v5.0.1:
+ - Contract address: 0xd30Ae575c403C55012805930ae548b7554AF3FBE
+ - Content (ipfs): QmdgRFJQjtXpnEEhYdnRpFhD3zMUapriW2KwZXNLgJgsg2
+ - Transaction hash: 0xd3de2f26ac05af6078a8556098f31551950c819264465cd9947df071b031659c
+
+### mybit-tokens.open.aragonpm.eth v5.0.0:
+ - Contract address: 0xd30Ae575c403C55012805930ae548b7554AF3FBE
+ - Content (ipfs): QmeKibxUDxMZnbE74qDJfWuhiny5ZQkiby13X4fdaCaKEt
+ - Transaction hash: 0x4897c8e7d7cde3bbd2ece6bda9c773ac26f52e9052380ed0f01698422d3e3813
+
+### mybit-tokens.open.aragonpm.eth v4.0.0:
+ - Contract address: 0xcfad9fA6322c37785e1daDd7a0fC591c3AD37305
+ - Content (ipfs): QmWo5cXqEmvCRzkLRHxzSeLpEhxLFTJ6Lb9RBScqbDfbhq
+ - Transaction hash: 0xaefc89699449ad88d8b2cf1484fde86f1edc456b69723273dec0770b9d60eb4e
+
+### mybit-tokens.open.aragonpm.eth v3.0.2:
+ - Contract address: 0x530FD10bc8B2F7B42687E036b046755dE4A8adBC
+ - Content (ipfs): QmNn3vqFUmh4vfsbN8kQ3TGRbjNeGR4sqvc8Xpq4DU52m6
+ - Transaction hash: 0x253423b86b0c087f7f3db35e1ff6cb92909d2bc66d633ac2c17d8378815dfe61
+
+### mybit-tokens.open.aragonpm.eth v3.0.1:
+ - Contract address: 0x530FD10bc8B2F7B42687E036b046755dE4A8adBC
+ - Content (ipfs): QmQnzrE1xWh1wrxAYNQJ9jRh19J9gajbUKU5y5FUfdv1pp
+ - Transaction hash: 0x55182426b3c5d2f2595acff8e9f73f790261b4724a6f28c1ea5c7a41e847c56a
+
+### mybit-tokens.open.aragonpm.eth v3.0.0:
+ - Contract address: 0x530FD10bc8B2F7B42687E036b046755dE4A8adBC
+ - Content (ipfs): QmNa3paEtcfV7yRAxqJw5K72AsXR5bVPw9hgiqaSFai41v
+ - Transaction hash: 0x760cd70d92315fee871f51831fe681565a9ce5cd44276a7476202cfc9211b01e
 
 ## Deploying Kit Locally
  - You will need to open two terminals. One in the root directory and the other in the app directory.
@@ -165,6 +195,21 @@ The voting app requires the following initialization parameters:
  - That should complete your DAO! You can access the front end at https://[network].aragon.org/#/[dao-address]
 
 ## Past Rinkeby Deployments
+###  mybit-tokens.open.aragonpm.eth v2.1.0:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmairPQn9Dj2Xdn9wThKCPZhE5xfkRaM6nUFYtkjrtVSfX
+ - Transaction hash: 0x9c74c52e29e55570d3a112cfbd44a7945311aae601f3facdb37e3fb33a83ec9e
+
+### mybit-tokens.open.aragonpm.eth v2.0.9:
+ - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+ - Content (ipfs): QmQNHxW11o9dbM61Jrv4TscL3DDLs8Y2zYigvJkxWhq4NP
+ - Transaction hash: 0xee216022a8a2849322f899537ad4162d685f4945d0d8df7ab583e94fcf84f568
+
+### mybit-tokens.open.aragonpm.eth v2.0.8:
+- Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
+- Content (ipfs): QmcYgoQoM5sDCKe1PzhbFnn2UDvh45VQDDY83dwbBGrFb8
+- Transaction hash: 0x120873f5dd3a38b4028fbcbf251857d779419a61290ff804c49bd396095e672e
+
 ### mybit-tokens.open.aragonpm.eth v2.0.7:
  - Contract address: 0x6a44c7C94D91D72AbFd5963488CbB2c26e5d9cab
  - Content (ipfs): QmcYgoQoM5sDCKe1PzhbFnn2UDvh45VQDDY83dwbBGrFb8

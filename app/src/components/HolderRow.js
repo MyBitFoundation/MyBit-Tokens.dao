@@ -69,40 +69,38 @@ class HolderRow extends React.Component {
           {formatBalance(balance, tokenDecimalsBase)}
         </TableCell>
         <TableCell align="right">
-          {isCurrentUser && (
-            <ContextMenu>
-              {canLock && (
-                <ContextMenuItem onClick={this.handleLockTokens}>
-                  <IconWrapper>
-                    <IconAdd />
-                  </IconWrapper>
-                  <ActionLabel>Lock {erc20Symbol}</ActionLabel>
-                </ContextMenuItem>
-              )}
-              {balance > (claimed ? claimAmount : 0) && (
-                <ContextMenuItem onClick={this.handleUnlockTokens}>
-                  <IconWrapper>
-                    <IconRemove />
-                  </IconWrapper>
-                  <ActionLabel>
-                    Unlock {erc20Symbol}
-                    {singleToken ? '' : 's'}
-                  </ActionLabel>
-                </ContextMenuItem>
-              )}
-              {balance > 0 && (
-                <ContextMenuItem onClick={this.handleBurnTokens}>
-                  <IconWrapper>
-                    <IconRemove />
-                  </IconWrapper>
-                  <ActionLabel>
-                    Burn Token
-                    {singleToken ? '' : 's'}
-                  </ActionLabel>
-                </ContextMenuItem>
-              )}
-            </ContextMenu>
-          )}
+          <ContextMenu>
+            {isCurrentUser && canLock && (
+              <ContextMenuItem onClick={this.handleLockTokens}>
+                <IconWrapper>
+                  <IconAdd />
+                </IconWrapper>
+                <ActionLabel>Lock {erc20Symbol}</ActionLabel>
+              </ContextMenuItem>
+            )}
+            {isCurrentUser && balance > (claimed ? claimAmount : 0) && (
+              <ContextMenuItem onClick={this.handleUnlockTokens}>
+                <IconWrapper>
+                  <IconRemove />
+                </IconWrapper>
+                <ActionLabel>
+                  Unlock {erc20Symbol}
+                  {singleToken ? '' : 's'}
+                </ActionLabel>
+              </ContextMenuItem>
+            )}
+            {!isCurrentUser && balance > 0 && (
+              <ContextMenuItem onClick={this.handleBurnTokens}>
+                <IconWrapper>
+                  <IconRemove />
+                </IconWrapper>
+                <ActionLabel>
+                  Burn Token
+                  {singleToken ? '' : 's'}
+                </ActionLabel>
+              </ContextMenuItem>
+            )}
+          </ContextMenu>
         </TableCell>
       </TableRow>
     )
