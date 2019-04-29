@@ -1,5 +1,8 @@
+# DEPRECATED - See https://github.com/MyBitFoundation/MyBit-DAO.tech instead
+
 # MyBit Tokens Aragon App
 ## Rinkeby Deployment
+
 ###mybit-tokens.open.aragonpm.eth v6.0.0:
  - Contract address: 0x9e30C203E106E6c07cC47E4bfED1252f44cb5516
  - Content (ipfs): QmXdd39rTr8Bt5kdaZwPFD1JLJ4Lmktkxn8CG7ZHofxcdN
